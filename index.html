@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Interativo: Operador Ternário</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 700px; margin: auto; padding: 20px; background: #f4f4f4; }
+    h1 { text-align: center; }
+    .pergunta { margin-bottom: 20px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 0 5px #ccc; }
+    button { padding: 10px 20px; font-size: 16px; display: block; margin: 20px auto; }
+    #resultado { text-align: center; font-weight: bold; font-size: 18px; margin-top: 20px; }
+    .explicacao { background: #e9f5ff; padding: 10px; border-left: 4px solid #2c7be5; margin-top: 10px; display: none; }
+    .correta { background: #d4edda; }
+    .incorreta { background: #f8d7da; }
+  </style>
+</head>
+<body>
+
+  <h1>Quiz: Operador Ternário em JavaScript</h1>
+
+  <form id="quiz">
+    <div class="pergunta" id="q1">
+      <p><strong>1.</strong> Qual é a finalidade do operador ternário em JavaScript?</p>
+      <label><input type="radio" name="q1" value="C"> Substituir uma estrutura if-else simples</label><br>
+      <label><input type="radio" name="q1" value="A"> Criar uma função com três parâmetros</label><br>
+      <label><input type="radio" name="q1" value="B"> Fazer uma repetição com três condições</label><br>
+      <label><input type="radio" name="q1" value="D"> Declarar três variáveis ao mesmo tempo</label>
+      <div class="explicacao">✅ O operador ternário é uma forma curta de fazer um if-else em uma linha.</div>
+    </div>
+
+    <div class="pergunta" id="q2">
+      <p><strong>2.</strong> O que será impresso?<br>
+        <code>let idade = 20;<br>console.log(idade >= 18 ? "Maior de idade" : "Menor de idade");</code></p>
+      <label><input type="radio" name="q2" value="B"> Maior de idade</label><br>
+      <label><input type="radio" name="q2" value="A"> Idade inválida</label><br>
+      <label><input type="radio" name="q2" value="C"> Menor de idade</label><br>
+      <label><input type="radio" name="q2" value="D"> true</label>
+      <div class="explicacao">✅ A condição <code>idade >= 18</code> é verdadeira, então o resultado será "Maior de idade".</div>
+    </div>
+
+    <div class="pergunta" id="q3">
+      <p><strong>3.</strong> Qual das opções representa a forma correta de usar o operador ternário?</p>
+      <label><input type="radio" name="q3" value="C"> resultado = condicao ? valor1 : valor2;</label><br>
+      <label><input type="radio" name="q3" value="A"> x ? y : z = resultado;</label><br>
+      <label><input type="radio" name="q3" value="B"> resultado = x if y else z;</label><br>
+      <label><input type="radio" name="q3" value="D"> resultado = valor1 : valor2 ? condicao;</label>
+      <div class="explicacao">✅ A sintaxe correta do ternário é: <code>condição ? valor_se_verdadeiro : valor_se_falso</code>.</div>
+    </div>
+
+    <div class="pergunta" id="q4">
+      <p><strong>4.</strong> Se <code>nota = 5.5</code>, o que será exibido?<br>
+        <code>console.log(nota >= 6 ? "Aprovado" : "Reprovado");</code></p>
+      <label><input type="radio" name="q4" value="B"> Reprovado</label><br>
+      <label><input type="radio" name="q4" value="A"> Aprovado</label><br>
+      <label><input type="radio" name="q4" value="C"> Nota inválida</label><br>
+      <label><input type="radio" name="q4" value="D"> Erro de sintaxe</label>
+      <div class="explicacao">✅ Como 5.5 não é maior ou igual a 6, a resposta será "Reprovado".</div>
+    </div>
+
+    <div class="pergunta" id="q5">
+      <p><strong>5.</strong> Ternários podem ser usados dentro de template strings?</p>
+      <label><input type="radio" name="q5" value="A"> Sim, usando <code>${condicao ? valor1 : valor2}</code></label><br>
+      <label><input type="radio" name="q5" value="B"> Não, só em console.log diretamente</label><br>
+      <label><input type="radio" name="q5" value="C"> Sim, mas apenas com var</label><br>
+      <label><input type="radio" name="q5" value="D"> Apenas se o valor for booleano</label>
+      <div class="explicacao">✅ Template strings aceitam expressões dentro de `${}`, incluindo ternários.</div>
+    </div>
+
+    <button type="button" onclick="corrigir()">Corrigir</button>
+    <div id="resultado"></div>
+  </form>
+
+  <script>
+    function corrigir() {
+      const respostas = {
+        q1: "C",
+        q2: "B",
+        q3: "C",
+        q4: "B",
+        q5: "A"
+      };
+
+      let acertos = 0;
+
+      for (let i = 1; i <= 5; i++) {
+        const perguntaEl = document.getElementById(`q${i}`);
+        const selecionado = document.querySelector(`input[name="q${i}"]:checked`);
+
+        perguntaEl.classList.remove("correta", "incorreta");
+
+        if (selecionado) {
+          if (selecionado.value === respostas[`q${i}`]) {
+            acertos++;
+            perguntaEl.classList.add("correta");
+          } else {
+            perguntaEl.classList.add("incorreta");
+          }
+        } else {
+          perguntaEl.classList.add("incorreta");
+        }
+
+        // Mostrar explicações
+        const explicacao = perguntaEl.querySelector(".explicacao");
+        if (explicacao) {
+          explicacao.style.display = "block";
+        }
+      }
+
+      document.getElementById("resultado").textContent =
+        `✅ Você acertou ${acertos} de 5 perguntas.`;
+    }
+  </script>
+
+</body>
+</html>
